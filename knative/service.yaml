@@ -1,0 +1,35 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: lingua-greeter
+spec:
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
+    spec:
+      containers:
+      - image: dev.local/rhdevelopers/kn-lingua-greeter:v1.0-SNAPSHOT
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /data/google-cloud-credentials.json
+        
+        imagePullPolicy: IfNotPresent        
+        resources:
+          limits:
+            memory: 150Mi
+            cpu: 250m
+        livenessProbe:
+          httpGet:
+            path: /health
+        readinessProbe:
+          httpGet:
+            path: /health
+        volumeMounts:
+        - name: google-cloud-creds
+          mountPath: /data
+          readOnly: true
+      volumes:
+      - name: google-cloud-creds
+        secret:
+          secretName: google-cloud-creds
