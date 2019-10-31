@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
 metadata:
-  name: stream-greeter-svc-deploy
+  name: lingua-greeter-knsvc-deploy
 spec:
   params:
   - name: mavenMirrorUrl
@@ -54,7 +54,6 @@ spec:
         - >
           yq 
           w 
-          -d1 
           $(params.contextDir)/knative/service.yaml 
           spec.template.spec.containers[0].image 
           $(inputs.resources.image.url) | kubectl apply -f -

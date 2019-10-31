@@ -9,16 +9,15 @@ spec:
         sidecar.istio.io/inject: "false"
     spec:
       containers:
-      - image: dev.local/rhdevelopers/kn-lingua-greeter:v1.0-SNAPSHOT
+      - image: will be updated by build
         env:
         - name: GOOGLE_APPLICATION_CREDENTIALS
           value: /data/google-cloud-credentials.json
-        
         imagePullPolicy: IfNotPresent        
         resources:
-          limits:
-            memory: 150Mi
-            cpu: 250m
+          # limits:
+          #   memory: 1000m
+          #   cpu: 1Gi
         livenessProbe:
           httpGet:
             path: /health

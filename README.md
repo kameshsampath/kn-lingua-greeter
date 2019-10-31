@@ -46,7 +46,7 @@ kubectl apply  -n knativetutorial -f $PROJECT_HOME/kubernetes/build-and-deploy.y
 Run the pipeline using the command
 
 ```shell
-tkn pipeline start kn-svc-deploy \
+tkn pipeline start lingua-greeter-knsvc-deploy \
  --param="mavenMirrorUrl=http://nexus.rhd-workshop-infra:8081/nexus/content/groups/public"  \
  --resource="appSource=lingua-greeter-git-source" \
  --resource="appImage=lingua-greeter-image" \
